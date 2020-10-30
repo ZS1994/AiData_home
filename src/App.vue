@@ -1,12 +1,15 @@
 <template>
   <div id="app">
     <el-container>
-      <el-header>AiData</el-header>
+      <el-header>
+        <router-link to="/" tag="p"> AiData </router-link>
+      </el-header>
       <el-container>
-        <el-aside width="200px">
+        <el-aside>
           <my-menu></my-menu>
         </el-aside>
         <el-main>
+          <load-map></load-map>
           <router-view></router-view>
         </el-main>
       </el-container>
@@ -19,10 +22,12 @@
 <script>
 
 import Menu from '@/menu/Menu'
+import LoadMap from '@/page/LoadMap'
 
 export default {
   components: {
-    myMenu: Menu
+    myMenu: Menu,
+    loadMap: LoadMap
   },
   methods: {
     startHacking () {
@@ -51,6 +56,7 @@ export default {
 .el-main {
   background-color: #e9eef3;
   color: #333;
+  padding: 10px;
 }
 
 /*
