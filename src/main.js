@@ -12,7 +12,10 @@ import VueAxios from 'vue-axios'
 import qs from 'qs'
 import AiDataApi from '@/menu/AiDataApi'
 
+
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+axios.defaults.headers.post['token'] = localStorage.getItem("token")  //以“key”为名称存储一个值“value”
+
 // 设置反向代理，前端请求默认发送到 http://localhost:8443/api
 axios.defaults.baseURL = '/api'
 Vue.use(VueAxios, axios)
@@ -21,6 +24,8 @@ Vue.config.productionTip = false
 /*作用是阻止vue 在启动时生成生产提示。*/
 
 Vue.prototype.$AiDataApi = AiDataApi
+
+Vue.prototype.$axios = axios
 // 封装POST请求
 Vue.prototype.$axiosPost = function (url, params, callback) {
 	axios.post(url,
@@ -40,6 +45,7 @@ Vue.prototype.$axiosGet = function (url, callback) {
 	})
 
 }
+
 
 
 Vue.use(ElementUI)
