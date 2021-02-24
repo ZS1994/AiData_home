@@ -11,7 +11,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import qs from 'qs'
 import AiDataApi from '@/menu/AiDataApi'
-
+import { Message } from 'element-ui'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
 axios.defaults.headers.post['token'] = localStorage.getItem("token")  //以“key”为名称存储一个值“value”
@@ -20,29 +20,59 @@ axios.defaults.headers.post['token'] = localStorage.getItem("token")  //以“ke
 axios.defaults.baseURL = '/api'
 Vue.use(VueAxios, axios)
 axios.defaults.withCredentials = true
+// 拦截响应response，并做一些错误处理
+axios.interceptors.response.use(
+    (response) => {
+        return response
+    },
+    (error) => {
+        Message({
+            message: '系统错误: ' + error.response.data.message,
+            type: 'error',
+            // duration: 3 * 1000
+        })
+        return Promise.resolve(error);
+    }
+)
 Vue.config.productionTip = false
 /*作用是阻止vue 在启动时生成生产提示。*/
 
 Vue.prototype.$AiDataApi = AiDataApi
 
 Vue.prototype.$axios = axios
+
+
 // 封装POST请求
-Vue.prototype.$axiosPost = function (url, params, callback) {
+Vue.prototype.$axiosPost = function (url, params, callback, catchFun) {
 	axios.post(url,
 		qs.stringify(params),
 		{ headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' } }
 	).then(response => {
 		callback(response)
-	})
+	}).catch(error => {
+        // 如果异常处理方法没有定义，那么就用默认的异常处理
+        if(!catchFun){
+            console.log(error)
+        }else{
+            catchFun(error) 
+        }
+    })
 
 }
 // 封装GET请求
-Vue.prototype.$axiosGet = function (url, callback) {
+Vue.prototype.$axiosGet = function (url, callback, catchFun) {
 	axios.get(url,
 		{ headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' } }
 	).then(response => {
 		callback(response)
-	})
+	}).catch(error => {
+        // 如果异常处理方法没有定义，那么就用默认的异常处理
+        if(!catchFun){
+            console.log(error)
+        }else{
+            catchFun(error) 
+        }
+    })
 
 }
 

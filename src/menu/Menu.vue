@@ -6,8 +6,7 @@
     @close="handleClose"
     background-color="#545c64"
     text-color="#fff"
-    active-text-color="#ffd04b"
-  >
+    active-text-color="#ffd04b">
     <el-submenu index="1">
       <span slot="title"><i class="el-icon-menu"></i>广东移动</span>
       <el-menu-item-group>
@@ -19,11 +18,15 @@
         </el-menu-item>
       </el-menu-item-group>
     </el-submenu>
-    <el-menu-item index="2">
-      <i class="el-icon-menu"></i>
-      <span slot="title">导航二</span>
-    </el-menu-item>
-    <el-menu-item index="4">
+    <el-submenu index="2">
+      <span slot="title"><i class="el-icon-menu"></i>测试</span>
+      <el-menu-item-group>
+        <el-menu-item index="2-1">
+          <router-link to="/core/login" tag="p">用户登录认证</router-link>
+        </el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+    <el-menu-item index="3">
       <i class="el-icon-setting"></i>
       <span slot="title">导航四</span>
     </el-menu-item>

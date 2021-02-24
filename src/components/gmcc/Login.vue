@@ -20,10 +20,15 @@
         </el-form-item>
         <el-button type="primary" @click="sendSmsCode"> 发送验证码 </el-button>
         <el-button type="primary" @click="login" :disabled="!loginAble">
-          登录
-        </el-button>
-        {{ sessionid }}
+          登录</el-button
+        >
         <el-button type="reset" @click="reset">重置</el-button>
+        <el-button type="primary" @click="getProdToken">
+          获取produToken </el-button
+        >{{ prodToken }}
+        <el-button type="primary" @click="getProdToken">获取produToken </el-button>{{ prodToken }}
+
+        <el-button type="primary" @click="getPicCode"> 获取图形验证码</el-button>
       </el-form>
     </el-row>
   </div>
@@ -93,6 +98,22 @@ export default {
     clearToken () {
       localStorage.removeItem("token");  //删除名称为“key”的信息。
       this.token = localStorage.getItem("token")
+    },
+    // 获取ProdToken
+    getProdToken () {
+      this.$axiosPost(this.$AiDataApi.cmcc.gmcc.getProdToken,
+        this.editForm,
+        (response) => {
+          this.$message({
+            message: response.data.desc,
+            type: 'success'
+          })
+        }
+      )
+    },
+    // 
+    getPicCode(){
+
     }
 
 
