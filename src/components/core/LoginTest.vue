@@ -10,6 +10,8 @@
         </el-form-item>
         <el-button type="primary" @click="login">登录</el-button>
         <el-button type="primary" @click="logout">登出</el-button>
+        <el-button type="primary" @click="test1">test1</el-button>
+        <el-button type="primary" @click="test2">test2</el-button>
         <el-button type="reset" @click="reset">重置</el-button>
       </el-form>
     </el-row>
@@ -47,6 +49,28 @@ export default {
     },
     logout(){
       this.$axiosPost(this.$AiDataApi.core.auth.logout,
+        this.editForm,
+        (response) => {
+          this.$message({
+            message: response.data.message,
+            type: 'success'
+          })
+        }
+      )    
+    },
+    test1(){
+      this.$axiosPost(this.$AiDataApi.core.auth.test1,
+        this.editForm,
+        (response) => {
+          this.$message({
+            message: response.data.message,
+            type: 'success'
+          })
+        }
+      )    
+    },
+    test2(){
+      this.$axiosPost(this.$AiDataApi.core.auth.test2,
         this.editForm,
         (response) => {
           this.$message({

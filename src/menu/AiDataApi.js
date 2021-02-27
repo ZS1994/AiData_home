@@ -4,24 +4,26 @@ const api = {
     dccp: {},
     gmcc: {
       // 发送短信验证码
-      sendSmsCode: '/cmcc/gmcc/sendSmsCode',
+      sendSmsCode: '/cmcc/gmccAppController/sendSmsCode',
       // 登录
-      login: '/cmcc/gmcc/login',
+      login: '/cmcc/gmccAppController/login',
 
-      getProdToken: '/cmcc/gmcc/getProdToken'
+      getProdToken: '/cmcc/gmccAppController/getProdToken'
 
+    },
+    jwt: {
+        // 生成一个token
+        createToken: '/cmcc/jwtController/createToken'
     }
   },
   core: {
-    sys: {
-      // 生成一个token
-      createToken: '/core/sys/createToken'
-    },
     auth: {
         // 测试shiro的登录认证
-        login: '/core/sys/auth/login',
+        login: '/core/loginController/login',
         // 登出
-        logout: '/core/sys/auth/logout',
+        logout: '/core/loginController/logout',
+        test1: '/core/loginController/test1',
+        test2: '/core/loginController/test2',
     }
   }
 }

@@ -86,7 +86,7 @@ export default {
     },
     // 生成一个token，测试用
     createToken () {
-      this.$axiosPost(this.$AiDataApi.core.sys.createToken,
+      this.$axiosPost(this.$AiDataApi.cmcc.jwt.createToken,
         {},
         (response) => {
           localStorage.setItem("token", response.data.token)  //以“key”为名称存储一个值“value”
