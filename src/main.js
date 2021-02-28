@@ -14,7 +14,11 @@ import AiDataApi from '@/menu/AiDataApi'
 import { Message } from 'element-ui'
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-axios.defaults.headers.post['token'] = localStorage.getItem("token")  //以“key”为名称存储一个值“value”
+// 以“key”为名称存储一个值“value”
+axios.defaults.headers.post['token'] = localStorage.getItem("token")?localStorage.getItem("token"):''
+axios.defaults.headers.post['authorization'] = localStorage.getItem("authorization")?localStorage.getItem("authorization"):''
+// 设置请求携带cookie
+axios.defaults.withCredentials = true
 
 // 设置反向代理，前端请求默认发送到 http://localhost:8443/api
 axios.defaults.baseURL = '/api'
@@ -23,6 +27,11 @@ axios.defaults.withCredentials = true
 // 拦截响应response，并做一些错误处理
 axios.interceptors.response.use(
     (response) => {
+        let sessionid = response.headers.authorization
+        if (sessionid) {
+            localStorage.setItem("authorization", sessionid)
+            axios.defaults.headers.post['authorization'] = sessionid
+        }
         return response
     },
     (error) => {
