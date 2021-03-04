@@ -24,6 +24,9 @@ const api = {
         logout: '/core/loginController/logout',
         test1: '/core/loginController/test1',
         test2: '/core/loginController/test2',
+    },
+    permission:{
+        findListByPage: '/core/coreSysPermissionController/findListByPage',
     }
   }
 }

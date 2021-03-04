@@ -9,7 +9,6 @@
           <my-menu></my-menu>
         </el-aside>
         <el-main>
-          <load-map></load-map>
           <router-view></router-view>
         </el-main>
       </el-container>

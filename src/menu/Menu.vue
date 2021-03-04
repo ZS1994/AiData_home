@@ -24,6 +24,9 @@
         <el-menu-item index="2-1">
           <router-link to="/core/login" tag="p">用户登录认证</router-link>
         </el-menu-item>
+        <el-menu-item index="2-2">
+          <router-link to="/core/sysUserList" tag="p">用户管理</router-link>
+        </el-menu-item>
       </el-menu-item-group>
     </el-submenu>
     <el-menu-item index="3">

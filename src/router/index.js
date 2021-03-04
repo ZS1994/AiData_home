@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import CopClass from '@/components/EnterPage'
 import GmccLogin from '@/components/gmcc/login'
 import CoreLogin from '@/components/core/LoginTest'
-
+import SysUserList from '@/components/core/sys/SysUserList'
 
 Vue.use(Router)
 
@@ -23,6 +23,11 @@ export default new Router({
 			path: '/core/login',
 			name: 'CoreLogin',
 			component: CoreLogin
+        },
+		{
+			path: '/core/sysUserList',
+			name: 'SysUserList',
+			component: SysUserList
         }
         
 	]
