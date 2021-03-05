@@ -5,7 +5,7 @@
         <router-link to="/" tag="p"> AiData </router-link>
       </el-header>
       <el-container>
-        <el-aside>
+        <el-aside width="200px">
           <my-menu></my-menu>
         </el-aside>
         <el-main>
@@ -53,7 +53,7 @@ export default {
 }
 
 .el-main {
-  background-color: #e9eef3;
+  background-color: #ffffff;
   color: #333;
   padding: 10px;
 }
