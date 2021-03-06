@@ -85,6 +85,33 @@ Vue.prototype.$axiosGet = function (url, callback, catchFun) {
 
 }
 
+// 封装非空判断方法，是否为空(包括空字符串、空格、null,{})
+Vue.prototype.$isEmpty = function (val) {
+  let isNull = false
+  if (val == null || typeof (val) == 'undefined' || val === undefined) {
+    isNull = true;
+  }
+  // 先判断是否为null，返回true ，判断是否为空字符串，返回true
+	if (!isNull) { 
+    // 空对象
+    if(val instanceof Object){
+      if(JSON.stringify(val)== "{}"){
+        return true
+      }
+    }
+    //已修正bug[当strings为数字时，会报strings.replace is not a function]
+    if ((val + '').replace(/(^\s*)|(\s*$)/g, '').length === 0) { 
+      return true;
+    }
+  } else {
+    return true;
+  }
+  // 不为空返回false
+  return false;
+}
+Vue.prototype.$isNotEmpty = function (val) {
+  return !this.$isEmpty(val)
+}
 
 
 Vue.use(ElementUI)

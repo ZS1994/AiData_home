@@ -3,7 +3,7 @@ const myMixin = {
   created() {
     this.searchKey = Object.assign({}, this.searchKeyDefault)
   },
-  mounted:function(){
+  mounted() {
     this.$nextTick(function () {
         this.tableHeight = window.innerHeight - this.$refs.table.$el.offsetTop - 60;
         
@@ -19,6 +19,7 @@ const myMixin = {
   data() {
     return {
       findPageListURL: '',
+      delURL: '',
       searchKeyDefault: {},
       searchKey: Object.assign({}, this.searchKeyDefault),
       tableHeight: 50,
@@ -34,6 +35,13 @@ const myMixin = {
   methods: {
     // 分页查询
     findListByPage() {
+      if (this.$isEmpty(this.findPageListURL)){
+        this.$message({
+          message: 'findPageListURL为空，请配置',
+          type: 'error'
+        })
+        return
+      }
       this.loading = true
       this.$axiosPost(
         this.findPageListURL+'/' + this.pageInfo.pageSize + '/' + this.pageInfo.pageNum,
@@ -52,8 +60,39 @@ const myMixin = {
       this.searchKey = Object.assign({}, this.searchKeyDefault)
     },
     add(){
-      
+      this.$refs.edit.add()
     },
+    edit(index, row){
+      this.$refs.edit.edit(index, row)
+    },
+    del(index, row){
+      this.$confirm('请确认是否删除?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        if (this.$isEmpty(this.delURL)){
+          this.$message({
+            message: 'delURL为空，请配置',
+            type: 'error'
+          })
+          return
+        }
+        this.$axiosPost(
+          this.delURL + '/' + row.pId,
+          {},
+          (response) => {
+            // 触发父类查询事件
+            this.findListByPage()
+          }
+        )
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
+    }
   },
 }
 export default myMixin
