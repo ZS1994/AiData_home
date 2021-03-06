@@ -45,6 +45,8 @@ export default {
     },
     doneSubmit(){
       this.submit()
+    },
+    close(){
       this.isShow = false
     }
 
