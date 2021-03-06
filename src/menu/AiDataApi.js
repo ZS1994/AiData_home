@@ -31,7 +31,18 @@ const api = {
       insertUser: '/core/coreSysUserController/insertUser',
       updateUser: '/core/coreSysUserController/updateUser',
       deleteUser: '/core/coreSysUserController/deleteUser',
-      
+    },
+    role:{
+      findListByPage: '/core/coreSysRoleController/findListByPage',
+      insert: '/core/coreSysRoleController/insert',
+      update: '/core/coreSysRoleController/update',
+      delete: '/core/coreSysRoleController/delete',
+    },
+    menu:{
+      findListByPage: '/core/coreSysMenuController/findListByPage',
+      insert: '/core/coreSysMenuController/insert',
+      update: '/core/coreSysMenuController/update',
+      delete: '/core/coreSysMenuController/delete',
     },
   }
 }
